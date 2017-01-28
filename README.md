@@ -12,6 +12,7 @@ Core Javascript Library for URL Operations.
   
     To get list of URI params as Object.
     
+    
         Ex. 
         
         URI.getParam();
@@ -26,6 +27,7 @@ Core Javascript Library for URL Operations.
   
     To add list of param from the URI.
     
+    
         Ex.
         
         URI.addParam([{'page': 1}, {'limit': 5}]);
@@ -35,9 +37,10 @@ Core Javascript Library for URL Operations.
         After URL : http://domain.com/?type=myTicket&page=1&limit=5
         
 
-  **3. removeParam()**
+  **3. removeParam()**  
   
     To remove list of param from the URI.
+    
     
         Ex. 
         
@@ -52,6 +55,7 @@ Core Javascript Library for URL Operations.
   
     To move to next page by update the URI.
     
+    
         Ex.
         
         URI.nextPage();
@@ -62,8 +66,9 @@ Core Javascript Library for URL Operations.
         
      
   **5. prevPage()**
-  
+    
     To go back to previous page by update the URI.
+    
     
         Ex. 
         
@@ -75,6 +80,7 @@ Core Javascript Library for URL Operations.
         
         
   **6. isParamExists()**
+  
   
     To check the param is exist in URI or Not.
     
@@ -94,6 +100,7 @@ Core Javascript Library for URL Operations.
   
     To replace the value of the param in URI.
     
+    
         Ex. 
         
         URI.replaceParam('page',5);
@@ -107,6 +114,7 @@ Core Javascript Library for URL Operations.
   
     To get value of the param from URI.
     
+    
         Ex.
         
         URI.getParamByName('type');
@@ -116,6 +124,6 @@ Core Javascript Library for URL Operations.
         OUT : 'myTicket'
         
         
-   ### License 
+ ### License 
    
    MIT License
