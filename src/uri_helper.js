@@ -16,6 +16,7 @@ var URI = {
                 return queryDict;
             }
         },
+  
         // To Add Param To URI.
         addParam: function (list) {
 
@@ -48,6 +49,7 @@ var URI = {
             // To Update the URI.
             window.history.pushState('', 'Title', newQuery.slice(0, -1));
         },
+  
         // To Remove Param From URI.
         removeParam: function (list) {
 
