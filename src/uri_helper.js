@@ -16,6 +16,38 @@ var URI = {
                 return queryDict;
             }
         },
+        // To Add Param To URI.
+        addParam: function (list) {
+
+            // To Check the type is Object or Not.
+            if (typeof list != 'object') return false;
+            // To Get list of Params.
+            var core_list = this.getParams();
+            // To Count the Params to check existence.
+            var count = this.objCount(core_list);
+            // If No params exist, then return false.
+            if (count <= 0) return false;
+
+            // Make Updated_list as Core List.
+            var updated_list = core_list;
+
+            // Loop with New Params.
+            for (var i in list) {
+                // Adding Params to Existing list.
+                for (var k in list[i]) {
+                    updated_list[k] = list[i][k];
+                }
+            }
+
+            var newQuery = '?';
+            // To Form New and Updated Query.
+            for (var i in updated_list) {
+                newQuery += i + '=' + updated_list[i] + '&';
+            }
+
+            // To Update the URI.
+            window.history.pushState('', 'Title', newQuery.slice(0, -1));
+        },
         // To Remove Param From URI.
         removeParam: function (list) {
 
