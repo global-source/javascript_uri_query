@@ -1,7 +1,8 @@
-var URI = {
+// Simple Instance for access URI.
 
-        // To Get list of URL params.
+var URI = {
         getParams: function (byString) {
+            console.log(location.search.substr(1).split("&"));
 
             if (byString) {
                 // Return param list as String.
@@ -13,10 +14,40 @@ var URI = {
                     // Make Object of Params.
                     queryDict[item.split("=")[0]] = item.split("=")[1]
                 });
-                return queryDict;
             }
+
+            return queryDict;
         },
-  
+        // To Remove Param From URI.
+        removeParam: function (list) {
+
+            // To Check the type is Object or Not.
+            if (typeof list != 'object') return false;
+            // To Get list of Params.
+            var core_list = this.getParams();
+            // To Count the Params to check existence.
+            var count = this.objCount(core_list);
+            // If No params exist, then return false.
+            if (count <= 0) return false;
+
+            // Make Updated_list as Core List.
+            var updated_list = core_list;
+
+            // Generate Update List by eliminating the element list.
+            for (var i = 0; i < list.length; i++) {
+                // Remove the list of elements, one by one.
+                delete updated_list[list[i]];
+            }
+
+            var newQuery = '?';
+            // To Form New and Updated Query.
+            for (var i in updated_list) {
+                newQuery += i + '=' + updated_list[i] + '&';
+            }
+
+            // To Update the URI.
+            window.history.pushState('', 'Title', newQuery.slice(0, -1));
+        },
         // To Add Param To URI.
         addParam: function (list) {
 
@@ -49,43 +80,12 @@ var URI = {
             // To Update the URI.
             window.history.pushState('', 'Title', newQuery.slice(0, -1));
         },
-  
-        // To Remove Param From URI.
-        removeParam: function (list) {
-
-            // To Check the type is Object or Not.
-            if (typeof list != 'object') return false;
-            // To Get list of Params.
-            var core_list = this.getParams();
-            // To Count the Params to check existance.
-            var count = this.objCount(core_list);
-            // If No params exist, then return false.
-            if (count <= 0) return false;
-
-            // Make Updated_list as Core List.
-            var updated_list = core_list;
-
-            // Generate Update List by eliminating the element list.
-            for (var i = 0; i < list.length; i++) {
-                // Remove the list of elements, one by one.
-                delete updated_list[list[i]];
-            }
-
-            var newQuery = '?';
-            // To Form New and Updated Query.
-            for (var i in updated_list) {
-                newQuery += i + '=' + updated_list[i] + '&';
-            }
-
-            // To Update the URI.
-            window.history.pushState('', 'Title', newQuery.slice(0, -1));
-        },
         // To Go to Next Page.
         nextPage: function () {
             // To Get the actual value of "page"
-            var page = this.getParameterByName('page');
+            var page = this.getParamByName('page');
             if (!page) {
-                page = 0;
+                page = 1;
             }
             page++;
             // Update the Param "page" value.
@@ -94,12 +94,12 @@ var URI = {
         // To Go back to Previous Page.
         prevPage: function () {
             // To Get the actual value of "page"
-            var page = this.getParameterByName('page');
+            var page = this.getParamByName('page');
             if (!page) {
-                page = 0;
+                page = 1;
             }
 
-            if (page != 0) {
+            if (page != 1) {
                 page--;
             }
 
@@ -125,7 +125,7 @@ var URI = {
             // Form New Param with Value.
             var newValue = param + '=' + value;
             // Form Old Param with Value.
-            var oldValue = param + '=' + this.getParameterByName(param);
+            var oldValue = param + '=' + this.getParamByName(param);
 
             // To Check have param or not.
             if (this.objCount(total) > 0) {
@@ -157,7 +157,7 @@ var URI = {
             return length;
         },
         // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
-        getParameterByName: function (name, url) {
+        getParamByName: function (name, url) {
             if (!url) {
                 url = window.location.href;
             }
