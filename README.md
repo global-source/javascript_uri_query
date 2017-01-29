@@ -2,7 +2,7 @@
 Core Javascript Library for URL Operations.
 
 [![Packagist](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
-[![Packagist](https://img.shields.io/badge/tested-success-brightgreen.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
+[![Packagist](https://img.shields.io/badge/tests-success-brightgreen.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
 
 ### Installation
 
