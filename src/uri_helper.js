@@ -2,8 +2,7 @@
 
 var URI = {
         getParams: function (byString) {
-            console.log(location.search.substr(1).split("&"));
-
+                
             if (byString) {
                 // Return param list as String.
                 return location.search.substr(1).split("&");
@@ -15,7 +14,6 @@ var URI = {
                     queryDict[item.split("=")[0]] = item.split("=")[1]
                 });
             }
-
             return queryDict;
         },
         // To Remove Param From URI.
@@ -44,13 +42,11 @@ var URI = {
             for (var i in updated_list) {
                 newQuery += i + '=' + updated_list[i] + '&';
             }
-
             // To Update the URI.
             window.history.pushState('', 'Title', newQuery.slice(0, -1));
         },
         // To Add Param To URI.
         addParam: function (list) {
-
             // To Check the type is Object or Not.
             if (typeof list != 'object') return false;
             // To Get list of Params.
@@ -59,10 +55,8 @@ var URI = {
             var count = this.objCount(core_list);
             // If No params exist, then return false.
             if (count <= 0) return false;
-
             // Make Updated_list as Core List.
             var updated_list = core_list;
-
             // Loop with New Params.
             for (var i in list) {
                 // Adding Params to Existing list.
@@ -95,10 +89,12 @@ var URI = {
         prevPage: function () {
             // To Get the actual value of "page"
             var page = this.getParamByName('page');
+            // If "page" is not defined, then init with "1".
             if (!page) {
                 page = 1;
             }
 
+            // Don't allow to remove if page index is "1".
             if (page != 1) {
                 page--;
             }
@@ -148,12 +144,16 @@ var URI = {
         },
         // To Count number of object elements.
         objCount: function (object) {
+            // Initiating Length.
             var length = 0;
+             // Looping the Objects.
             for (var key in object) {
-                if (object.hasOwnProperty(key)) {
+                // Check with object existance.
+                if (object.hasOwnProperty(key)) {                     
                     ++length;
                 }
             }
+            // Total count of Objects.
             return length;
         },
         // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
