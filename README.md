@@ -15,8 +15,7 @@ Core Javascript Library for URL Operations.
   To get list of URI params as Object.    
     
         Ex. 
-        
-        URI.getParam();
+              URI.getParam();
         
         URL : http://domain.com/?type=myTicket&page=1&limit=5
         
@@ -28,9 +27,8 @@ Core Javascript Library for URL Operations.
   
 To add list of param from the URI.    
     
-        Ex.
-        
-        URI.addParam([{'page': 1}, {'limit': 5}]);
+        Ex.        
+                     URI.addParam([{'page': 1}, {'limit': 5}]);
         
         Before URL : http://domain.com/?type=myTicket
         
@@ -41,9 +39,8 @@ To add list of param from the URI.
   
 To remove list of param from the URI.
   
-        Ex. 
-        
-        URI.removeParam(['page','limit']);
+        Ex.         
+                     URI.removeParam(['page','limit']);
         
         Before URL : http://domain.com/?type=myTicket&page=1&limit=5
         
@@ -54,9 +51,8 @@ To remove list of param from the URI.
   
 To move to next page by update the URI.
     
-        Ex.
-        
-        URI.nextPage();
+        Ex.        
+                     URI.nextPage();
         
         Before URL : http://domain.com/?type=myTicket&page=1&limit=5
         
@@ -67,9 +63,8 @@ To move to next page by update the URI.
     
 To go back to previous page by update the URI.
     
-        Ex. 
-        
-        URI.prevPage();
+        Ex.         
+                     URI.prevPage();
         
         Before URL : http://domain.com/?type=myTicket&page=2&limit=5
         
@@ -96,9 +91,8 @@ To check the param is exist in URI or Not.
   
 To replace the value of the param in URI.
     
-        Ex. 
-        
-        URI.replaceParam('page',5);
+        Ex.         
+                    URI.replaceParam('page',5);
         
         Before URI : http://domain.com/?type=myTicket&page=2&limit=5
         
@@ -109,9 +103,8 @@ To replace the value of the param in URI.
   
 To get value of the param from URI.
     
-        Ex.
-        
-        URI.getParamByName('type');
+        Ex.        
+              URI.getParamByName('type');
         
         URI : http://domain.com/?type=myTicket&page=2&limit=5
         
