@@ -1,6 +1,6 @@
 {
   "name": "global-source/javascript_uri_query",
-  "description": "Core JavaScript URI Library.",
+  "description": "Core Javascript Library for URI CURD.",
   "email":"shankarthiyagaraajan@gmail.com",
   "license": "MIT"
 }
