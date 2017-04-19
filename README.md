@@ -40,11 +40,11 @@ To add list of param from the URI.
 To remove list of param from the URI.
   
         Ex.         
-                     URI.removeParam(['page','limit']);
+                     URI.removeParam(['page']);
         
         Before URL : http://domain.com/?type=myTicket&page=1&limit=5
         
-        After URL : http://domain.com/?type=myTicket
+        After URL : http://domain.com/?type=myTicket&limit=5
         
      
 **4. nextPage()**
