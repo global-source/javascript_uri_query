@@ -4,11 +4,11 @@ Core Javascript Library for URL Operations.
 [![Packagist](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
 [![Packagist](https://img.shields.io/badge/tests-success-brightgreen.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
 
-### Installation
+## Installation
 
     <script src="./uri_helper.js"></script>
     
-### Example
+## Example
   
   **1. getParams()**
   
@@ -111,6 +111,6 @@ To get value of the param from URI.
         OUT : 'myTicket'
         
         
-### License 
+# License 
    
    MIT License
