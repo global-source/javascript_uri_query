@@ -16,7 +16,7 @@ Core Javascript Library for URL Operations.
     
         Ex. URI.getParam();
         
-        URL : http://domain.com/?type=myTicket&page=1&limit=5
+        URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
         OUT : ["type=myTicket", "page=1", "limit=5"]
         
@@ -28,9 +28,9 @@ To add list of param from the URI.
     
         Ex. URI.addParam([{'page': 1}, {'limit': 5}]);
         
-        Before URL : http://domain.com/?type=myTicket
+        Before URL : http://domain.com/?type=my-ticket
         
-        After URL : http://domain.com/?type=myTicket&page=1&limit=5
+        After URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
 
 **3. removeParam()**  
@@ -39,9 +39,9 @@ To remove list of param from the URI.
   
         Ex. URI.removeParam(['page']);
         
-        Before URL : http://domain.com/?type=myTicket&page=1&limit=5
+        Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
-        After URL : http://domain.com/?type=myTicket&limit=5
+        After URL : http://domain.com/?type=my-ticket&limit=5
         
      
 **4. nextPage()**
@@ -50,9 +50,9 @@ To move to next page by update the URI.
     
         Ex. URI.nextPage();
         
-        Before URL : http://domain.com/?type=myTicket&page=1&limit=5
+        Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
-        After URL : http://domain.com/?type=myTicket&page=2&limit=5
+        After URL : http://domain.com/?type=my-ticket&page=2&limit=5
         
      
 **5. prevPage()**
@@ -61,9 +61,9 @@ To go back to previous page by update the URI.
     
         Ex. URI.prevPage();
         
-        Before URL : http://domain.com/?type=myTicket&page=2&limit=5
+        Before URL : http://domain.com/?type=my-ticket&page=2&limit=5
         
-        After URL : http://domain.com/?type=myTicket&page=1&limit=5
+        After URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
         
 **6. isParamExists()**
@@ -74,7 +74,7 @@ To check the param is exist in URI or Not.
         1: URI.isParamExists('page');        
         2: URI.isParamExists('newPage');
         
-        URL : http://domain.com/?type=myTicket&page=2&limit=5
+        URL : http://domain.com/?type=my-ticket&page=2&limit=5
         
         OUT 1 : true
         OUT 2 : false
@@ -86,9 +86,9 @@ To replace the value of the param in URI.
     
         Ex. URI.replaceParam('page',5);
         
-        Before URI : http://domain.com/?type=myTicket&page=2&limit=5
+        Before URI : http://domain.com/?type=my-ticket&page=2&limit=5
         
-        After URI : http://domain.com/?type=myTicket&page=5&limit=5
+        After URI : http://domain.com/?type=my-ticket&page=5&limit=5
         
            
 **8. getParamByName()**
