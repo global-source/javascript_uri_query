@@ -2,6 +2,8 @@
 
 var URI = {
         getParams: function (byString) {
+            // Sanity check.
+            if(typeof byString === 'undefined') byString = false;
                 
             if (byString) {
                 // Return param list as String.
@@ -158,9 +160,15 @@ var URI = {
         },
         // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
         getParamByName: function (name, url) {
+            // Sanity check.
+            if(typeof url === 'undefined') url = false;
+            if(typeof name === 'undefined') name = false;
+                
             if (!url) {
                 url = window.location.href;
             }
+            if(!name) return false;
+                
             name = name.replace(/[\[\]]/g, "\\$&");
             var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
                 results = regex.exec(url);
