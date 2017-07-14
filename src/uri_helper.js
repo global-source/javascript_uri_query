@@ -1,4 +1,23 @@
-// Simple Instance for access URI.
+/*!
+ * JavaScript URI Query
+ * Simple Instance for access URI.
+ *
+ * Author : Shankar Thiyagaraajan
+ * Email  : shankarthiyagaraajan@gmail.com
+ * Github : https://github.com/shankarThiyagaraajan
+ *
+ * Source
+ * https://github.com/global-source/javascript_uri_query
+ *
+ * Site
+ * https://global-source.github.io/javascript_uri_query/
+ *
+ * Copyright 2017
+ *
+ * Released under the MIT license
+ * https://github.com/global-source/javascript_uri_query/blob/master/LICENSE
+ *
+ */
 
 var URI = {
         getParams: function (byString) {
