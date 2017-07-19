@@ -38,7 +38,7 @@ var URI = {
         return queryDict;
     },
    // To Remove Params by object or single.
-    removeParam: function (list) {
+    remove: function (list) {
         // General instance for list.
         var isObject = true;
 
@@ -82,7 +82,7 @@ var URI = {
         window.history.pushState('', 'Title', newQuery);
     },
      // To remove all params in URI.
-    removeAllParams: function () {
+    removeAll: function () {
         window.history.pushState('', 'Title', '?');
     },
     // To Add Param To URI.
