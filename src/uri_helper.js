@@ -81,6 +81,10 @@ var URI = {
         // To Update the URI.
         window.history.pushState('', 'Title', newQuery);
     },
+     // To remove all params in URI.
+    removeAllParams: function () {
+        window.history.pushState('', 'Title', '?');
+    },
     // To Add Param To URI.
     addParam: function (list) {
         // To Check the type is Object or Not.
