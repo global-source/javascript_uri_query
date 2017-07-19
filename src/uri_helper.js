@@ -37,10 +37,14 @@ var URI = {
         }
         return queryDict;
     },
-   // To Remove Params by object or single.
-    remove: function (list) {
-        // General instance for list.
+       // To Remove Params by object or single.
+    remove: function (list, value, multiple) {
+
         var isObject = true;
+
+        var item;
+        var item_out;
+        var temp_obj = {};
 
         // To Check the type is Object or Not.
         if (typeof list != 'object') isObject = false;
@@ -58,35 +62,64 @@ var URI = {
         // Make Updated_list as Core List.
         var updated_list = core_list;
 
-        if (true === isObject) {
-            // Generate Update List by eliminating the element list.
-            for (var i = 0; i < list.length; i++) {
-                // Remove the list of elements, one by one.
-                delete updated_list[list[i]];
+        // Remove stacked item from the index.
+        if (true === multiple && false === isObject) {
+            item = this.getParamByName(list);
+            item += ',';
+            if (-1 !== item.indexOf(',')) {
+                item = item.split(',');
+                // if ('object' === typeof item) {
+                delete item[item.indexOf(value)];
+                // }
             }
+
+            if ('string' === typeof item) item = [item];
+
+            // Removing the empty values.
+            item = item.filter(function (i) {
+                return ('' !== i);
+            });
+
+            if (0 === item.length) this.remove(list);
+
+            // Join to make string.
+            item_out = item.join(',');
+            temp_obj[list] = item_out;
+            // Update the resulted value value to URI.
+            this.addParam([temp_obj]);
         } else {
-            // Remove single index.
-            delete updated_list[list];
+            if (true === isObject) {
+                // Generate Update List by eliminating the element list.
+                for (var i = 0; i < list.length; i++) {
+                    // Remove the list of elements, one by one.
+                    delete updated_list[list[i]];
+                }
+            } else {
+                // Remove single index.
+                delete updated_list[list];
+            }
+
+            var newQuery = '?';
+            // To Form New and Updated Query.
+            for (var i in updated_list) {
+                newQuery += i + '=' + updated_list[i] + '&';
+            }
+            // Update the query output.
+            newQuery = newQuery.slice(0, -1);
+            // If output is empty, then set it into "?"
+            if ('' === newQuery) newQuery = '?';
+            // To Update the URI.
+            window.history.pushState('', 'Title', newQuery);
         }
 
-        var newQuery = '?';
-        // To Form New and Updated Query.
-        for (var i in updated_list) {
-            newQuery += i + '=' + updated_list[i] + '&';
-        }
-        // Update the query output.
-        newQuery = newQuery.slice(0, -1);
-        // If output is empty, then set it into "?"
-        if ('' === newQuery) newQuery = '?';
-        // To Update the URI.
-        window.history.pushState('', 'Title', newQuery);
     },
      // To remove all params in URI.
     removeAll: function () {
         window.history.pushState('', 'Title', '?');
     },
-    // To Add Param To URI.
-    addParam: function (list) {
+        // To Add Param To URI.
+    addParam: function (list, append) {
+        var temp_object;
         // To Check the type is Object or Not.
         if (typeof list != 'object') return false;
         // To Get list of Params.
@@ -97,16 +130,49 @@ var URI = {
         if (count <= 0) return false;
         // Make Updated_list as Core List.
         var updated_list = core_list;
-        // Loop with New Params.
-        for (var i in list) {
-            // Adding Params to Existing list.
-            for (var k in list[i]) {
-                updated_list[k] = list[i][k];
+
+        // Append multiple value for single index.
+        if (true === append) {
+            var val;
+            var val_result;
+            for (var i in list) {
+                if (typeof list[i] === 'object') {
+                    for (var k in list[i]) {
+                        val_result = URI.getParamByName(k);
+                        if (false !== val_result) {
+                            temp_object = val_result.split(',');
+                            // If already exists, then ignore.
+                            if (-1 !== temp_object.indexOf(list[i][k])) continue;
+                            val = val_result + ',';
+                            // If not exist, then reset.
+                            if (false === val_result || '' === val_result) {
+                                val = '';
+                            }
+                            // Append to the list.
+                            val = val + list[i][k];
+                        } else {
+                            val = list[i][k];
+                        }
+                        updated_list[k] = val;
+                    }
+                }
+            }
+            // Only one value per index.
+        } else {
+            // Loop with New Params.
+            for (var i in list) {
+                // Adding Params to Existing list.
+                for (var k in list[i]) {
+                    // If empty, the remove
+                    if ('' === list[i][k]) continue;
+                    updated_list[k] = list[i][k];
+                }
             }
         }
 
         var newQuery = '?';
         // To Form New and Updated Query.
+        console.log(updated_list);
         for (var i in updated_list) {
             newQuery += i + '=' + updated_list[i] + '&';
         }
