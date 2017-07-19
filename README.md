@@ -1,4 +1,4 @@
-# Javascript_URI_query
+# Javascript URI Query
 Core Javascript Library for URL Operations.
 
 [![Packagist](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/1.0)
@@ -22,9 +22,20 @@ Core Javascript Library for URL Operations.
         
         
 
-**2. addParam()**
+**2. getParamByName()**
   
-To add list of param from the URI.    
+To get value of the param from URI.
+    
+        Ex. URI.getParamByName('type');
+        
+        URI : http://domain.com/?type=myTicket&page=2&limit=5
+        
+        OUT : 'myTicket'
+        
+        
+**3. addParam()**
+  
+To add list of param to the URI. If item already exists, then value get updated.    
     
         Ex. URI.addParam([{'page': 1}, {'limit': 5}]);
         
@@ -33,29 +44,31 @@ To add list of param from the URI.
         After URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
 
-**3. removeParam()**  
+**4. remove()**  
   
 To remove list of param from the URI.
   
-        Ex. URI.removeParam(['page']);
+        Ex. 
+        URI.removeParam(['page','limit']);   // For Bulk.
+        URI.removeParam('type');             // For Single.   
         
         Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
-        After URL : http://domain.com/?type=my-ticket&limit=5
+        After URL : http://domain.com/?
         
      
-**4. nextPage()**
+**5. removeAll()**
   
-To move to next page by update the URI.
+To remove all param in the URI.
     
-        Ex. URI.nextPage();
+        Ex. URI.removeAll();
         
-        Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
+        Before URI : http://domain.com/?type=my-ticket&page=2&limit=5
         
-        After URL : http://domain.com/?type=my-ticket&page=2&limit=5
+        After URI : http://domain.com/?
         
      
-**5. prevPage()**
+**6. prevPage()**
     
 To go back to previous page by update the URI.
     
@@ -66,7 +79,18 @@ To go back to previous page by update the URI.
         After URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
         
-**6. isParamExists()**
+**7. nextPage()**
+  
+To move to next page by update the URI.
+    
+        Ex. URI.nextPage();
+        
+        Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
+        
+        After URL : http://domain.com/?type=my-ticket&page=2&limit=5
+        
+        
+**8. isParamExists()**
   
 To check the param is exist in URI or Not.
     
@@ -78,28 +102,7 @@ To check the param is exist in URI or Not.
         
         OUT 1 : true
         OUT 2 : false
-        
-        
-**7. replaceParam()**
-  
-To replace the value of the param in URI.
-    
-        Ex. URI.replaceParam('page',5);
-        
-        Before URI : http://domain.com/?type=my-ticket&page=2&limit=5
-        
-        After URI : http://domain.com/?type=my-ticket&page=5&limit=5
-        
-           
-**8. getParamByName()**
-  
-To get value of the param from URI.
-    
-        Ex. URI.getParamByName('type');
-        
-        URI : http://domain.com/?type=myTicket&page=2&limit=5
-        
-        OUT : 'myTicket'
+       
         
         
 # License 
