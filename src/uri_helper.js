@@ -37,11 +37,17 @@ var URI = {
         }
         return queryDict;
     },
-    // To Remove Param From URI.
+   // To Remove Params by object or single.
     removeParam: function (list) {
+        // General instance for list.
+        var isObject = true;
 
         // To Check the type is Object or Not.
-        if (typeof list != 'object') return false;
+        if (typeof list != 'object') isObject = false;
+
+        // If list is not object or string, then return false.
+        if (false === isObject && 'string' !== typeof list) return false;
+
         // To Get list of Params.
         var core_list = this.getParams();
         // To Count the Params to check existence.
@@ -52,10 +58,15 @@ var URI = {
         // Make Updated_list as Core List.
         var updated_list = core_list;
 
-        // Generate Update List by eliminating the element list.
-        for (var i = 0; i < list.length; i++) {
-            // Remove the list of elements, one by one.
-            delete updated_list[list[i]];
+        if (true === isObject) {
+            // Generate Update List by eliminating the element list.
+            for (var i = 0; i < list.length; i++) {
+                // Remove the list of elements, one by one.
+                delete updated_list[list[i]];
+            }
+        } else {
+            // Remove single index.
+            delete updated_list[list];
         }
 
         var newQuery = '?';
