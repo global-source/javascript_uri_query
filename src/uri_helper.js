@@ -181,22 +181,30 @@ var URI = {
         // Total count of Objects.
         return length;
     },
-    // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
-    getParamByName: function (name, url) {
+   // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
+    getParamByName: function (name, url, default_result) {
         // Sanity check.
-        if (typeof url === 'undefined') url = false;
-        if (typeof name === 'undefined') name = false;
-
+        if (typeof url === 'undefined' && url) url = false;
+        if (typeof name === 'undefined' && name) name = false;
+        if (typeof default_result === 'undefined') default_result = false;
+        // Default response.
+        var response;
+        // Sanity check.
         if (!url) {
+            // If not valid, then update the active url.
             url = window.location.href;
         }
-        if (!name) return false;
+        // If filter name is not valid then return the default value.
+        if (!name) return default_result;
 
         name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
             results = regex.exec(url);
-        if (!results) return null;
+        if (!results) return default_result;
         if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+        response = decodeURIComponent(results[2].replace(/\+/g, " "));
+        // If final response is not valid, then return the "default_result".
+        if (null === response) return default_result;
+        return response;
     }
 };
