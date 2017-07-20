@@ -6,7 +6,9 @@ Core Javascript Library for URL Operations.
 
 ## Installation
 
-    <script src="./uri_helper.js"></script>
+Include the URI library to project by using,
+
+    <script src="uri_helper.js"></script>
     
 ## Example
   
@@ -14,13 +16,14 @@ Core Javascript Library for URL Operations.
   
   To get list of URI params as Object.    
     
-        Ex. URI.getParam();
+    ```javascript
+    
+        URI.getParam();    
         
+    ```
         URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
-        OUT : ["type=myTicket", "page=1", "limit=5"]
-        
-        
+        Output : ["type=myTicket", "page=1", "limit=5"]
 
 **2. getParamByName()**
   
