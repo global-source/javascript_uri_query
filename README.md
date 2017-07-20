@@ -31,13 +31,13 @@ Include the URI library to project by using,
     
 ## Methods
   
-  ### get()
+  ### getAll()
   
   To get list of URI params as Object.    
     
 ```javascript
     
-           URI.get();    
+           URI.getAll();    
         
         // URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
@@ -46,13 +46,13 @@ Include the URI library to project by using,
 ```
         
 
-### getParamByName()
+### get()
   
 To get value of the param from URI.
         
 ```javascript
 
-           URI.getParamByName('type');
+           URI.get('type');
         
         // URI : http://domain.com/?type=myTicket&page=2&limit=5
         
