@@ -20,24 +20,56 @@
  */
 
 var URI = {
-    getParams: function (byString) {
+    // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
+    get: function (name, url, default_result) {
+        // Sanity check.
+        if (typeof url === 'undefined' && url) url = false;
+        if (typeof name === 'undefined' && name) name = false;
+        if (typeof default_result === 'undefined') default_result = false;
+        // Default response.
+        var response;
+        // Sanity check.
+        if (!url) {
+            // If not valid, then update the active url.
+            url = window.location.href;
+        }
+        // If filter name is not valid then return the default value.
+        if (!name) return default_result;
+
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return default_result;
+        if (!results[2]) return '';
+        response = decodeURIComponent(results[2].replace(/\+/g, " "));
+        // If final response is not valid, then return the "default_result".
+        if (null === response) return default_result;
+        return response;
+    },
+    // To get an URI data by index.
+    getAll: function (byString) {
         // Sanity check.
         if (typeof byString === 'undefined') byString = false;
+        var queryDict;
+        queryDict = {};
 
         if (byString) {
             // Return param list as String.
             return location.search.substr(1).split("&");
         } else {
-            var queryDict = {};
             // To loop the params.
             location.search.substr(1).split("&").forEach(function (item) {
-                // Make Object of Params.
-                queryDict[item.split("=")[0]] = item.split("=")[1]
+                // If empty, then return.
+                if ('' !== item) {
+                    item = item.split("=");
+                    // Make Object of Params.
+                    queryDict[item[0]] = item[1];
+                }
             });
         }
         return queryDict;
     },
-       // To Remove Params by object or single.
+    // To Remove Params by object or single.
     remove: function (list, value, multiple) {
 
         var isObject = true;
@@ -53,7 +85,7 @@ var URI = {
         if (false === isObject && 'string' !== typeof list) return false;
 
         // To Get list of Params.
-        var core_list = this.getParams();
+        var core_list = this.getAll();
         // To Count the Params to check existence.
         var count = this.objCount(core_list);
         // If No params exist, then return false.
@@ -64,7 +96,7 @@ var URI = {
 
         // Remove stacked item from the index.
         if (true === multiple && false === isObject) {
-            item = this.getParamByName(list);
+            item = this.get(list);
             item += ',';
             if (-1 !== item.indexOf(',')) {
                 item = item.split(',');
@@ -86,7 +118,7 @@ var URI = {
             item_out = item.join(',');
             temp_obj[list] = item_out;
             // Update the resulted value value to URI.
-            this.addParam([temp_obj]);
+            this.add([temp_obj]);
         } else {
             if (true === isObject) {
                 // Generate Update List by eliminating the element list.
@@ -113,21 +145,18 @@ var URI = {
         }
 
     },
-     // To remove all params in URI.
-    removeAll: function () {
+    // To remove all params in URI.
+    removeAll: function (reset) {
         window.history.pushState('', 'Title', '?');
+        if (true === reset) window.location.reload();
     },
-        // To Add Param To URI.
-    addParam: function (list, append) {
+    // To Add Param To URI.
+    add: function (list, append) {
         var temp_object;
         // To Check the type is Object or Not.
         if (typeof list != 'object') return false;
         // To Get list of Params.
-        var core_list = this.getParams();
-        // To Count the Params to check existence.
-        var count = this.objCount(core_list);
-        // If No params exist, then return false.
-        if (count <= 0) return false;
+        var core_list = this.getAll();
         // Make Updated_list as Core List.
         var updated_list = core_list;
 
@@ -138,7 +167,7 @@ var URI = {
             for (var i in list) {
                 if (typeof list[i] === 'object') {
                     for (var k in list[i]) {
-                        val_result = URI.getParamByName(k);
+                        val_result = URI.get(k);
                         if (false !== val_result) {
                             temp_object = val_result.split(',');
                             // If already exists, then ignore.
@@ -180,10 +209,19 @@ var URI = {
         // To Update the URI.
         window.history.pushState('', 'Title', newQuery.slice(0, -1));
     },
+    fixURI: function () {
+        var URI_items = this.getAll();
+        this.removeAll();
+        for (var i in URI_items) {
+            if ('undefined' !== URI_items[i]) {
+                this.add([{i: URI_items[i]}]);
+            }
+        }
+    },
     // To Go to Next Page.
     nextPage: function () {
         // To Get the actual value of "page"
-        var page = this.getParamByName('page');
+        var page = this.get('page');
         if (!page) {
             page = 1;
         }
@@ -194,7 +232,7 @@ var URI = {
     // To Go back to Previous Page.
     prevPage: function () {
         // To Get the actual value of "page"
-        var page = this.getParamByName('page');
+        var page = this.get('page');
         // If "page" is not defined, then init with "1".
         if (!page) {
             page = 1;
@@ -215,7 +253,7 @@ var URI = {
         // Return, param is exist or not.
         return (paramString.indexOf(param + '=') !== -1);
     },
-    // To Replace | Append | Create param.
+    // To Replace | Append | Create param. [DEPRECATED]
     replaceParam: function (param, value) {
 
         // To extract the URI from URL.
@@ -227,7 +265,7 @@ var URI = {
         // Form New Param with Value.
         var newValue = param + '=' + value;
         // Form Old Param with Value.
-        var oldValue = param + '=' + this.getParamByName(param);
+        var oldValue = param + '=' + this.get(param);
 
         // To Check have param or not.
         if (this.objCount(total) > 0) {
@@ -261,31 +299,5 @@ var URI = {
         }
         // Total count of Objects.
         return length;
-    },
-   // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
-    getParamByName: function (name, url, default_result) {
-        // Sanity check.
-        if (typeof url === 'undefined' && url) url = false;
-        if (typeof name === 'undefined' && name) name = false;
-        if (typeof default_result === 'undefined') default_result = false;
-        // Default response.
-        var response;
-        // Sanity check.
-        if (!url) {
-            // If not valid, then update the active url.
-            url = window.location.href;
-        }
-        // If filter name is not valid then return the default value.
-        if (!name) return default_result;
-
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return default_result;
-        if (!results[2]) return '';
-        response = decodeURIComponent(results[2].replace(/\+/g, " "));
-        // If final response is not valid, then return the "default_result".
-        if (null === response) return default_result;
-        return response;
     }
 };
