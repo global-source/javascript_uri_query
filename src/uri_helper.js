@@ -20,19 +20,25 @@
  */
 
 var URI = {
+
     // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
     get: function (name, url, default_result) {
+
         // Sanity check.
         if (typeof url === 'undefined' && url) url = false;
         if (typeof name === 'undefined' && name) name = false;
         if (typeof default_result === 'undefined') default_result = false;
+
         // Default response.
         var response;
+
         // Sanity check.
         if (!url) {
+
             // If not valid, then update the active url.
             url = window.location.href;
         }
+
         // If filter name is not valid then return the default value.
         if (!name) return default_result;
 
@@ -46,6 +52,7 @@ var URI = {
         if (null === response) return default_result;
         return response;
     },
+
     // To get an URI data by index.
     getAll: function (byString) {
         // Sanity check.
@@ -72,15 +79,38 @@ var URI = {
 
     // To clear all URI params.
     clear: function () {
+        // To get all URI data's.
         var list = this.getAll();
-        this.remove(list);
+
+        // Loop to remove all URI data's.
         for (var i in list) {
             this.remove(i, list[i], false);
+        }
+
+        // Update URI status.
+        this.update();
+    },
+
+    update: function () {
+        // Get active URL.
+        var href = window.location.href;
+
+        // Check and remove "?" from URL.
+        if (href.indexOf('?') !== -1) {
+
+            // Remove "?" from URL.
+            href = href.slice(0, href.indexOf('?'));
+
+            // Update to URL.
+            window.history.pushState('', 'Title', href)
         }
     },
 
     // To Remove Params by object or single.
     remove: function (list, value, multiple) {
+
+        // If no objects, then clear all data.
+        if (0 === this.objCount()) return this.update();
 
         var isObject = true;
 
@@ -153,7 +183,6 @@ var URI = {
             // To Update the URI.
             window.history.pushState('', 'Title', newQuery);
         }
-
     },
     // To remove all params in URI.
     removeAll: function (reset) {
@@ -256,13 +285,17 @@ var URI = {
         // Update the Param "page" value.
         this.replaceParam('page', page);
     },
+
     // Sanity check of param.
     isParamExists: function (param) {
+
         // To extract the URI from URL.
         var paramString = location.search.substr(1);
+
         // Return, param is exist or not.
         return (paramString.indexOf(param + '=') !== -1);
     },
+
     // To Replace | Append | Create param. [DEPRECATED]
     replaceParam: function (param, value) {
 
@@ -274,39 +307,50 @@ var URI = {
 
         // Form New Param with Value.
         var newValue = param + '=' + value;
+
         // Form Old Param with Value.
         var oldValue = param + '=' + this.get(param);
 
         // To Check have param or not.
         if (this.objCount(total) > 0) {
+
             // To Check, whether param is exist or not.
             if (this.isParamExists(param)) {
+
                 // To Update the Value, If param already exist.
                 queryString = '?' + queryString.replace(oldValue, newValue);
             } else {
+
                 // To Create New Param, If not exist.
                 queryString = '?' + queryString + '&' + newValue;
             }
         } else {
+
             // To Create First param, If no param exist.
             queryString = '?' + newValue;
         }
+
         // To update to the URI.
         window.history.pushState('', 'Title', queryString);
 
         return queryString;
     },
+
     // To Count number of object elements.
     objCount: function (object) {
+
         // Initiating Length.
         var length = 0;
+
         // Looping the Objects.
         for (var key in object) {
+
             // Check with object existance.
             if (object.hasOwnProperty(key)) {
                 ++length;
             }
         }
+
         // Total count of Objects.
         return length;
     }
