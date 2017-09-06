@@ -69,6 +69,16 @@ var URI = {
         }
         return queryDict;
     },
+
+    // To clear all URI params.
+    clear: function () {
+        var list = this.getAll();
+        this.remove(list);
+        for (var i in list) {
+            this.remove(i, list[i], false);
+        }
+    },
+
     // To Remove Params by object or single.
     remove: function (list, value, multiple) {
 
