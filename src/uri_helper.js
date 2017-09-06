@@ -186,7 +186,11 @@ var URI = {
     },
     // To remove all params in URI.
     removeAll: function (reset) {
-        window.history.pushState('', 'Title', '?');
+        var href = window.document.href;
+        if (-1 !== href.indexOf('?')) {
+            href = href.split('?');
+            window.history.pushState('', 'Title', href[0]);
+        }
         if (true === reset) window.location.reload();
     },
     // To Add Param To URI.
