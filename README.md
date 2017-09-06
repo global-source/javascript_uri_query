@@ -15,6 +15,7 @@ Like,
   Add         | URI.add([{'page': 1}])
   Update      | URI.add([{'page': 2}])
   Delete      | URI.remove('page')
+  Clear       | URI.clear()
   Get         | URI.get('page')
   Bulk Add    | URI.add([{'page': 1},{'index',2}])
   Bulk Delete | URI.remove(['page','index'])
