@@ -13,13 +13,14 @@ Like,
  Action       | Method
  -------------|-----------------------------------
   Add         | URI.add([{'page': 1}])
+  Bulk Add    | URI.add([{'page': 1},{'index',2}])
   Update      | URI.add([{'page': 2}])
   Delete      | URI.remove('page')
+  Bulk Delete | URI.remove(['page','index'])
+  Delete All  | URI.removeAll()
   Clear       | URI.clear()
   Update      | URI.update()
   Get         | URI.get('page')
-  Bulk Add    | URI.add([{'page': 1},{'index',2}])
-  Bulk Delete | URI.remove(['page','index'])
 
 
 ## Installation
