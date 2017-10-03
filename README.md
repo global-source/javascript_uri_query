@@ -6,21 +6,21 @@ Core Javascript Library for URL Operations.
 
 ___
 
-One simple library to perform all kind of **URI** operations. 
-Like,
+One library to perform most of the **URI** operations. 
+Such as,
  
  
- Action       | Method
- -------------|-----------------------------------
-  Add         | URI.add([{'page': 1}])
-  Bulk Add    | URI.add([{'page': 1},{'index',2}])
-  Update      | URI.add([{'page': 2}])
-  Delete      | URI.remove('page')
-  Bulk Delete | URI.remove(['page','index'])
-  Delete All  | URI.removeAll()
-  Clear       | URI.clear()
-  Update      | URI.update()
-  Get         | URI.get('page')
+ Action       | Method                            | Description |
+ -------------|-----------------------------------|-------------|
+  Add         | URI.add([{'page': 1}])            | To add new param to URL.|
+  Bulk Add    | URI.add([{'page': 1},{'index',2}])| To add multiple params to URL.|
+  Update      | URI.add([{'page': 2}])            | To update param by simple add same param. |
+  Delete      | URI.remove('page')                | To remove param from URL. |
+  Bulk Delete | URI.remove(['page','index'])      | To remove multiple param from URL. |
+  Delete All  | URI.removeAll()                   | To remove all param in the URL. |
+  Clear       | URI.clear()                       | TO clear the URL history. |
+  Update      | URI.update()                      | To update URI status. |
+  Get         | URI.get('page')                   | To get value of a param. |
 
 
 ## Installation
