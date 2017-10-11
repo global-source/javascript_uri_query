@@ -109,31 +109,28 @@ var URI = {
     // To Remove Params by object or single.
     remove: function (list, value, multiple) {
 
+        // To Get list of Params.
+        var core_list = this.getAll();
+        // Sanity check.
+        if('undefined' === core_list) core_list = 0;
         // If no objects, then clear all data.
-        if (0 === this.objCount()) return this.update();
+        if (0 === this.objCount(core_list)) return this.update();
 
         var isObject = true;
 
         var item;
         var item_out;
         var temp_obj = {};
-
         // To Check the type is Object or Not.
         if (typeof list != 'object') isObject = false;
-
         // If list is not object or string, then return false.
         if (false === isObject && 'string' !== typeof list) return false;
-
-        // To Get list of Params.
-        var core_list = this.getAll();
         // To Count the Params to check existence.
         var count = this.objCount(core_list);
         // If No params exist, then return false.
         if (count <= 0) return false;
-
         // Make Updated_list as Core List.
         var updated_list = core_list;
-
         // Remove stacked item from the index.
         if (true === multiple && false === isObject) {
             item = this.get(list);
