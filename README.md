@@ -123,10 +123,16 @@ To remove list of param from the URI.
   
            URI.remove(['page','limit']);   // For Bulk.
            URI.remove('type');             // For Single.   
+           URI.remove('id','55')       // For Single Value.
         
         // Before URL : http://domain.com/?type=my-ticket&page=1&limit=5
         
         // After URL : http://domain.com/?
+        
+        // For Single Value:
+        // Before URL : http://domain.com/?id=45,23,55,34
+        
+        // After URL : http://domain.com/?id=45,23,34
 ```        
      
 ### removeAll()
