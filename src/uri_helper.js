@@ -183,7 +183,7 @@ var URI = {
     },
     // To remove all params in URI.
     removeAll: function (reset) {
-        var href = window.document.href;
+        var href = window.location.href;
         if (-1 !== href.indexOf('?')) {
             href = href.split('?');
             window.history.pushState('', 'Title', href[0]);
