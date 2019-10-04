@@ -15,7 +15,7 @@ Such as,
   Add         | URI.addNew(key, val)              | To add new param to URL. |
   Bulk Add    | URI.add([{key1 : val1},{key2: val2}])| To add multiple params to URL.|
   Append      | URI.append(key, val)              | To add new item to the existing value. |
-  Update Value      | URI.add([{key: val}])            | To update param by simple add same param. |
+  Update Value      | URI.add([{key: val}])            | To perform update with add function. |
   Delete      | URI.remove(key)                | To remove param from URL. |
   Bulk Delete | URI.remove([key1, key2])      | To remove multiple param from URL. |
   Delete All  | URI.removeAll()                   | To remove all param in the URL. |
