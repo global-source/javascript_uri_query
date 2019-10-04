@@ -190,7 +190,7 @@ class _URI {
         if (true === reset) window.location.reload();
     };
     // To Add Single Param To URI.
-    addNew = function(key, value){
+    addNew(key, value){
         let temp_object;
         // To Get list of Params.
         let core_list = this.getAll();
@@ -273,7 +273,7 @@ class _URI {
         // To Update the URI.
         window.history.pushState('', 'Title', newQuery.slice(0, -1));
     };
-    append = function(key, value){
+    append(key, value){
         let val;
         let val_result;
         let temp_object;
