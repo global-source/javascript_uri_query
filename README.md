@@ -15,13 +15,13 @@ Such as,
   Add         | URI.addNew(key, val)              | To add new param to URL. |
   Bulk Add    | URI.add([{key1 : val1},{key2: val2}])| To add multiple params to URL.|
   Append      | URI.append(key, val)              | To add new item to the existing value. |
-  Update      | URI.add([{'page': 2}])            | To update param by simple add same param. |
-  Delete      | URI.remove('page')                | To remove param from URL. |
-  Bulk Delete | URI.remove(['page','index'])      | To remove multiple param from URL. |
+  Update      | URI.add([{key: val}])            | To update param by simple add same param. |
+  Delete      | URI.remove(key)                | To remove param from URL. |
+  Bulk Delete | URI.remove([key1, key2])      | To remove multiple param from URL. |
   Delete All  | URI.removeAll()                   | To remove all param in the URL. |
   Clear       | URI.clear()                       | TO clear the URL history. |
   Update      | URI.update()                      | To update URI status. |
-  Get         | URI.get('page')                   | To get value of a param. |
+  Get         | URI.get(key)                   | To get value of a param. |
 
 
 ## Installation
@@ -62,10 +62,24 @@ To get value of the param from URI.
         
         // OUT : 'myTicket'
  ```
+                
+### addNew()
+  
+To add single param to the URI. If item already exists, then value get updated.    
+       
+```javascript 
+   
+           URI.add('page', 1);
+        
+        // Before URL : http://domain.com/?type=my-ticket
+        
+        // After URL : http://domain.com/?type=my-ticket&page=1
+        
+```
         
 ### add()
   
-To add list of param to the URI. If item already exists, then value get updated.    
+To add list of params to the URI. If item already exists, then value get updated.    
        
 ```javascript 
    
@@ -74,6 +88,20 @@ To add list of param to the URI. If item already exists, then value get updated.
         // Before URL : http://domain.com/?type=my-ticket
         
         // After URL : http://domain.com/?type=my-ticket&page=1&limit=5
+        
+```
+        
+### append()
+  
+To append value to the param in the URI.   
+       
+```javascript 
+   
+           URI.append(name, bala);
+        
+        // Before URL : http://domain.com/?name=shankar
+        
+        // After URL : http://domain.com/?name=shankar,bala
         
 ```
 
