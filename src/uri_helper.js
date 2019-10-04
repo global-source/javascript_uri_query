@@ -2,7 +2,7 @@
  * JavaScript URI Query
  * Simple Instance for access URI.
  *
- * Author : Shankar Thiyagaraajan
+ * Author : Shankar Thiyagarajan
  * Email  : shankarthiyagaraajan@gmail.com
  * Github : https://github.com/shankarThiyagaraajan
  *
@@ -12,7 +12,7 @@
  * Site
  * https://global-source.github.io/javascript_uri_query/
  *
- * Copyright 2017
+ * Copyright 2017-2019
  *
  * Released under the MIT license
  * https://github.com/global-source/javascript_uri_query/blob/master/LICENSE
@@ -20,7 +20,6 @@
  */
 
 var URI = {
-
     // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
     get: function (name, url, default_result) {
 
@@ -190,7 +189,32 @@ var URI = {
         }
         if (true === reset) window.location.reload();
     },
-    // To Add Param To URI.
+    // To Add Single Param To URI.
+    addNew: function(key, value){
+        var temp_object;
+        // To Get list of Params.
+        var core_list = this.getAll();
+        // Make Updated_list as Core List.
+        var updated_list = core_list;
+
+        // If Key or Value is empty then return False.
+        if('' == value || '' == key) return false;
+
+        // Append value to the List.
+        updated_list[key] = value;
+
+        var newQuery = '?';
+        // To Form New and Updated Query.
+        console.log(updated_list);
+        for (var i in updated_list) {
+            newQuery += i + '=' + updated_list[i] + '&';
+        }
+
+        // To Update the URI.
+        window.history.pushState('', 'Title', newQuery.slice(0, -1));
+   
+    },
+    // To Add list of Params To URI.
     add: function (list, append) {
         var temp_object;
         // To Check the type is Object or Not.
@@ -232,12 +256,44 @@ var URI = {
             for (var i in list) {
                 // Adding Params to Existing list.
                 for (var k in list[i]) {
-                    // If empty, the remove
+                    // If empty, then remove
                     if ('' === list[i][k]) continue;
                     updated_list[k] = list[i][k];
                 }
             }
         }
+
+        var newQuery = '?';
+        // To Form New and Updated Query.
+        console.log(updated_list);
+        for (var i in updated_list) {
+            newQuery += i + '=' + updated_list[i] + '&';
+        }
+
+        // To Update the URI.
+        window.history.pushState('', 'Title', newQuery.slice(0, -1));
+    },
+    append: function(key, value){
+        var val;
+        var val_result;
+        val_result = URI.get(key);
+        // To Get list of Params.
+        var core_list = this.getAll();
+        // Make Updated_list as Core List.
+         var updated_list = core_list;
+        if (false !== val_result) {
+            temp_object = val_result.split(',');
+            val = val_result + ',';
+            // If not exist, then reset.
+            if (false === val_result || '' === val_result) {
+                val = '';
+            }
+            // Append to the list.
+            val = val + value;
+        } else {
+            val = value;
+        }
+        updated_list[key] = val;
 
         var newQuery = '?';
         // To Form New and Updated Query.
