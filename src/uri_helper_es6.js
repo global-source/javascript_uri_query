@@ -19,7 +19,7 @@
  *
  */
 
-class URI {
+class _URI {
     // To Get Parameter by its Name [ex. ?page=123, function('page') => 123]
     get(name, url, default_result) {
 
