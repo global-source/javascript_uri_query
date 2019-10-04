@@ -32,6 +32,16 @@ Include the URI library to project by using,
 
     <script src="uri_helper.js"></script>
 ```    
+
+For **ES6**:
+
+```html
+
+    <script src="uri_helper_es6.js"></script>
+    <script>
+     let URI = new _URI(); 
+    </script>
+``` 
     
 ## Methods
   
