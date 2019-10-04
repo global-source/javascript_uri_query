@@ -15,7 +15,7 @@ Such as,
   Add         | URI.addNew(key, val)              | To add new param to URL. |
   Bulk Add    | URI.add([{key1 : val1},{key2: val2}])| To add multiple params to URL.|
   Append      | URI.append(key, val)              | To add new item to the existing value. |
-  Update      | URI.add([{key: val}])            | To update param by simple add same param. |
+  Update Value      | URI.add([{key: val}])            | To update param by simple add same param. |
   Delete      | URI.remove(key)                | To remove param from URL. |
   Bulk Delete | URI.remove([key1, key2])      | To remove multiple param from URL. |
   Delete All  | URI.removeAll()                   | To remove all param in the URL. |
@@ -30,14 +30,14 @@ Include the URI library to project by using,
 
 ```html
 
-    <script src="uri_helper.js"></script>
+    <script src="uri_helper.min.js"></script>
 ```    
 
 For **ES6**:
 
 ```html
 
-    <script src="uri_helper_es6.js"></script>
+    <script src="uri_helper_es6.min.js"></script>
     <script>
      let URI = new _URI(); 
     </script>
