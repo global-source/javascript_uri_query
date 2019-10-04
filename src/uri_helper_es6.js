@@ -79,15 +79,15 @@ class _URI {
     // To clear all URI params.
     clear() {
         // To get all URI data's.
-        let list = getAll();
+        let list = this.getAll();
 
         // Loop to remove all URI data's.
         for (let i in list) {
-            remove(i, list[i], false);
+            this.remove(i, list[i], false);
         }
 
         // Update URI status.
-        update();
+        this.update();
     };
 
     update() {
@@ -109,11 +109,11 @@ class _URI {
     remove(list, value, multiple) {
 
         // To Get list of Params.
-        let core_list = getAll();
+        let core_list = this.getAll();
         // Sanity check.
         if('undefined' === core_list) core_list = 0;
         // If no objects, then clear all data.
-        if (0 === objCount(core_list)) return update();
+        if (0 === this.objCount(core_list)) return update();
 
         let isObject = true;
 
@@ -125,14 +125,14 @@ class _URI {
         // If list is not object or string, then return false.
         if (false === isObject && 'string' !== typeof list) return false;
         // To Count the Params to check existence.
-        let count = objCount(core_list);
+        let count = this.objCount(core_list);
         // If No params exist, then return false.
         if (count <= 0) return false;
         // Make Updated_list as Core List.
         let updated_list = core_list;
         // Remove stacked item from the index.
         if (true === multiple && false === isObject) {
-            item = get(list);
+            item = this.get(list);
             item += ',';
             if (-1 !== item.indexOf(',')) {
                 item = item.split(',');
@@ -154,7 +154,7 @@ class _URI {
             item_out = item.join(',');
             temp_obj[list] = item_out;
             // Update the resulted value value to URI.
-            add([temp_obj]);
+            this.add([temp_obj]);
         } else {
             if (true === isObject) {
                 // Generate Update List by eliminating the element list.
@@ -193,7 +193,7 @@ class _URI {
     addNew = function(key, value){
         let temp_object;
         // To Get list of Params.
-        let core_list = getAll();
+        let core_list = this.getAll();
         // Make Updated_list as Core List.
         let updated_list = core_list;
 
@@ -220,7 +220,7 @@ class _URI {
         // To Check the type is Object or Not.
         if (typeof list != 'object') return false;
         // To Get list of Params.
-        let core_list = getAll();
+        let core_list = this.getAll();
         // Make Updated_list as Core List.
         let updated_list = core_list;
 
@@ -231,7 +231,7 @@ class _URI {
             for (let i in list) {
                 if (typeof list[i] === 'object') {
                     for (let k in list[i]) {
-                        val_result = URI.get(k);
+                        val_result = this.get(k);
                         if (false !== val_result) {
                             temp_object = val_result.split(',');
                             // If already exists, then ignore.
@@ -276,9 +276,10 @@ class _URI {
     append = function(key, value){
         let val;
         let val_result;
-        val_result = URI.get(key);
+        let temp_object;
+        val_result = this.get(key);
         // To Get list of Params.
-        let core_list = getAll();
+        let core_list = this.getAll();
         // Make Updated_list as Core List.
          let updated_list = core_list;
         if (false !== val_result) {
@@ -306,18 +307,18 @@ class _URI {
         window.history.pushState('', 'Title', newQuery.slice(0, -1));
     };
     fixURI() {
-        let URI_items = getAll();
-        removeAll();
+        let URI_items = this.getAll();
+        this.removeAll();
         for (let i in URI_items) {
             if ('undefined' !== URI_items[i]) {
-                add([{i: URI_items[i]}]);
+                this.add([{i: URI_items[i]}]);
             }
         }
     };
     // To Go to Next Page.
     nextPage() {
         // To Get the actual value of "page"
-        let page = get('page');
+        let page = this.get('page');
         if (!page) {
             page = 1;
         }
@@ -328,7 +329,7 @@ class _URI {
     // To Go back to Previous Page.
     prevPage() {
         // To Get the actual value of "page"
-        let page = get('page');
+        let page = this.get('page');
         // If "page" is not defined, then init with "1".
         if (!page) {
             page = 1;
@@ -340,7 +341,7 @@ class _URI {
         }
 
         // Update the Param "page" value.
-        replaceParam('page', page);
+        this.replaceParam('page', page);
     };
 
     // Sanity check of param.
@@ -369,10 +370,10 @@ class _URI {
         let oldValue = param + '=' + get(param);
 
         // To Check have param or not.
-        if (objCount(total) > 0) {
+        if (this.objCount(total) > 0) {
 
             // To Check, whether param is exist or not.
-            if (isParamExists(param)) {
+            if (this.isParamExists(param)) {
 
                 // To Update the Value, If param already exist.
                 queryString = '?' + queryString.replace(oldValue, newValue);
