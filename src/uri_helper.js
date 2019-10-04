@@ -106,7 +106,7 @@ var URI = {
     },
 
     // To Remove Params by object or single.
-    remove: function (list, value, multiple) {
+    remove: function (list, value) {
 
         // To Get list of Params.
         var core_list = this.getAll();
@@ -131,7 +131,7 @@ var URI = {
         // Make Updated_list as Core List.
         var updated_list = core_list;
         // Remove stacked item from the index.
-        if (true === multiple && false === isObject) {
+        if (value && false === isObject) {
             item = this.get(list);
             item += ',';
             if (-1 !== item.indexOf(',')) {
