@@ -1,8 +1,8 @@
 # Javascript URI Query
 Core Javascript Library for URL Operations.
 
-[![Packagist](https://img.shields.io/badge/Build-v.2.0-blue.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/v.2)
-[![Packagist](https://img.shields.io/badge/tests-success-brightgreen.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/v.2)
+[![Packagist](https://img.shields.io/badge/v.2.0-Build-green.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/v.2)
+[![Packagist](https://img.shields.io/badge/ES6-Support-blue.svg)](https://github.com/global-source/javascript_uri_query)
 
 ___
 
@@ -12,8 +12,9 @@ Such as,
  
  Action       | Method                            | Description |
  -------------|-----------------------------------|-------------|
-  Add         | URI.add([{'page': 1}])            | To add new param to URL.|
-  Bulk Add    | URI.add([{'page': 1},{'index',2}])| To add multiple params to URL.|
+  Add         | URI.addNew(key, val)              | To add new param to URL. |
+  Bulk Add    | URI.add([{key1 : val1},{key2: val2}])| To add multiple params to URL.|
+  Append      | URI.append(key, val)              | To add new item to the existing value. |
   Update      | URI.add([{'page': 2}])            | To update param by simple add same param. |
   Delete      | URI.remove('page')                | To remove param from URL. |
   Bulk Delete | URI.remove(['page','index'])      | To remove multiple param from URL. |
