@@ -1,5 +1,5 @@
 # Javascript URI Query
-Core Javascript Library for URL Operations.
+Core Javascript Library for Powerful URL level Operations ADD|UPDATE|DELETE and much more...
 
 [![Packagist](https://img.shields.io/badge/v.2.0-Build-green.svg)](https://github.com/global-source/javascript_uri_query/releases/tag/v.2)
 [![Packagist](https://img.shields.io/badge/ES6-Support-blue.svg)](https://github.com/global-source/javascript_uri_query)
