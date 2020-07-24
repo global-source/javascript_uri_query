@@ -377,9 +377,12 @@ var URI = {
                 // To Update the Value, If param already exist.
                 queryString = '?' + queryString.replace(oldValue, newValue);
             } else {
+                if (queryString != "" and queryString[queryString.length-1] != "&"){
+                     queryString = queryString + '&'
+                }
 
                 // To Create New Param, If not exist.
-                queryString = '?' + queryString + '&' + newValue;
+                queryString = '?' + queryString + newValue;
             }
         } else {
 
