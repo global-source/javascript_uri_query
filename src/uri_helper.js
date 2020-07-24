@@ -377,7 +377,7 @@ var URI = {
                 // To Update the Value, If param already exist.
                 queryString = '?' + queryString.replace(oldValue, newValue);
             } else {
-                if (queryString != "" and queryString[queryString.length-1] != "&"){
+                if (queryString != "" && queryString[queryString.length-1] != "&"){
                      queryString = queryString + '&'
                 }
 
